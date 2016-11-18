@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+  </head>
+  <body>
+    <ul id="messages"></ul>
+
+      <input id="messagebox" autocomplete="off" /><button id = "sendbutton">Send</button>
+      <input id="nickname"/><button id = "nickbutton">Set nickname</button>
+
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+    var nickname="";
+      const socket = io();
+
+
+      $('#nickbutton').click(()=>{
+          socket.emit('nickname', $('#nickname').val());
+          nickname= $("#nickname").val();
+      })
+
+      $('#sendbutton').click(()=>{
+        socket.emit('chat message', $('#messagebox').val());
+        $('#messagebox').val('');
+        return false;
+      });
+      socket.on('chat message', function(message){
+        $('#messages').append($('<li>').text(message['nick'] +": "+message['msg']));
+      });
+      socket.on('disconnection',(data)=>{
+        $('#messages').append($('<li>').text(data +" disconnected"));
+      });
+    </script>
+  </body>
+</html>
