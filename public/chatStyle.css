@@ -1,0 +1,20 @@
+.me{
+  background-color: lightgrey;
+  color: black;
+  text-align: right;
+  font-size: larger;
+}
+
+ .others{
+  text-align: left;
+  font-size: larger;
+}
+ul{
+  list-style-type: none;
+
+}
+#users{
+  color: #ab9898;
+  font-size: smaller;
+
+}
